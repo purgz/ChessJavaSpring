@@ -6,19 +6,19 @@ import Game from './components/Game';
 function App() {
 
 
-  return (
-    
-    <Routes>
+	return (
+		
+		<Routes>
 
-      <Route path = "/" element = {<Outlet/>}>
+			<Route path = "/" element = {<Outlet/>}>
 
-        <Route path = "/" element = {<Home/>}></Route>
+				<Route path = "/" element = {<Home/>}></Route>
 
-        <Route path = "/game" element = {<Game/>}></Route>
-      </Route>
+				<Route path = "/game" element = {<Game/>}></Route>
+			</Route>
 
-    </Routes>
-  )
+		</Routes>
+	)
 }
 
 export default App
