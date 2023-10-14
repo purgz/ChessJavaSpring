@@ -9,13 +9,23 @@ const client = new Client({
 client.onConnect = (frame) =>{
     console.log("Connected " + frame);
     client.subscribe("/topic/greetings", (greeting) =>{
-        console.log(JSON.parse(greeting.body).content);
+
+        const board = JSON.parse(greeting.body);
+        console.log(board);
+
+        for (let i = 0; i < board.length; i++){
+            if (board[i] != '\0'){
+                
+                console.log(board[i]);
+            }
+        }
+        
     })
 }
 
 function sendName(){
     client.publish({
-        destination: "/app/hello",
+        destination: "/app/startboard",
         body: JSON.stringify({"name": "test name"})
     })
 }

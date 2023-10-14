@@ -61,6 +61,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>io.github.purgz</groupId>
+			<artifactId>java-chess-engine</artifactId>
+			<version>1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
