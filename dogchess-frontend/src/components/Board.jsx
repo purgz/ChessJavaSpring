@@ -13,7 +13,7 @@ function Board(){
 
         <div className={'board'}>
             {squares.map((square) =>
-                <div onClick={getData} data-squareid={square} className={'square'} key={square}>{square}</div>
+                <div onClick={getData} data-squareid={square} className={'square'} key={square}></div>
             )}
         </div>
 
