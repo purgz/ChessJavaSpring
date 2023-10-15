@@ -31,16 +31,6 @@ function disconnect(){
     void client.deactivate();
 }
 
-function verifyMove(){
-    //here we will have logic for communicating with server
-    
-    return true;
-}
-
-
-
-
-
 function Game(){
 
 
@@ -52,19 +42,21 @@ function Game(){
 
     const [board, setBoard] = useState([]);
     
+    
     let startSquare = -1;
     let endSquare = -1;
-
 
     function dragPiece(e){
 
       const pieceSquare = e.target.parentNode.parentNode.getAttribute("data-squareid");
       startSquare = pieceSquare;
+
     }
 
+  
     function dropPiece(e){
       e.preventDefault();
-
+      
       if (e.target.className != "square"){
         endSquare = e.target.parentNode.parentNode.getAttribute("data-squareid");
       } else {
@@ -74,7 +66,7 @@ function Game(){
       sendMove(startSquare,endSquare);
       
       startSquare = -1;
-      endSquare = -1;
+      endSquare = -1;      
     }
 
     client.onConnect = (frame) =>{

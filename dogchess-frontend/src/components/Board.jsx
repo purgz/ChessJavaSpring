@@ -18,10 +18,12 @@ function getData(e){
     console.log(e.target.getAttribute("data-squareid"));
 }
 
+
 function allowPieceDrop(e){
-    e.stopPropagation();
-    e.preventDefault();
+  e.stopPropagation();
+  e.preventDefault();
 }
+
 
 function renderBoard(board,dragPiece){
     let squares = document.getElementsByClassName("square");
@@ -99,14 +101,17 @@ function Board({board, dropPiece, dragPiece}){
 
     const squares = Array.from(Array(64).keys());
 
+  
     return (
-
+        <>
         <div className={'board'}>
             {squares.map((square) =>
                 <div onDragOver={allowPieceDrop} onDrop={dropPiece} onClick={getData} data-squareid={square} className={'square'} key={square}></div>
             )}
         </div>
-
+        
+       
+        </>
     )
 }
 
