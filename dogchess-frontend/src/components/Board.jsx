@@ -1,17 +1,21 @@
 import "./Board.css"
 import { useEffect, useState } from "react";
+import blackKing from "../assets/black-king.svg"
+import whiteKing from "../assets/white-king.svg"
+import blackQueen from "../assets/black-queen.svg"
+import whiteQueen from "../assets/white-queen.svg"
+import blackRook from "../assets/black-rook.svg"
+import whiteRook from "../assets/white-rook.svg"
+import blackBishop from "../assets/black-bishop.svg"
+import whiteBishop from "../assets/white-bishop.svg"
+import blackKnight from "../assets/black-knight.svg"
+import whiteKnight from "../assets/white-knight.svg"
+import blackPawn from "../assets/black-pawn.svg"
+import whitePawn from "../assets/white-pawn.svg"
 
 function getData(e){
 
     console.log(e.target.getAttribute("data-squareid"));
-}
-
-function pieceDragStart(e){
-
-    const piece = e.target;
-    //const pieceSquare = piece.parentNode.getAttribute("data-squareid");
-
-    e.dataTransfer.setData("text", piece.id);
 }
 
 function allowPieceDrop(e){
@@ -19,10 +23,7 @@ function allowPieceDrop(e){
     e.preventDefault();
 }
 
-
-
-
-function renderBoard(board){
+function renderBoard(board,dragPiece){
     let squares = document.getElementsByClassName("square");
     
     for (let i = 0; i < 64; i++){
@@ -31,9 +32,52 @@ function renderBoard(board){
             let piece = document.createElement("div");
             piece.draggable=true;
             piece.textContent = board[i];
-            piece.ondragstart = pieceDragStart;
+            piece.ondragstart = dragPiece;
             squares[i].replaceChildren(piece);
             piece.id = i;
+            
+            let img = document.createElement("img");
+            
+            switch(board[i]){
+              case 'p':
+                img.src = blackPawn;
+                break;
+              case 'n':
+                img.src = blackKnight;
+                break;
+              case 'b':
+                img.src = blackBishop;
+                break;
+              case 'r':
+                img.src = blackRook;
+                break;
+              case 'q':
+                img.src = blackQueen;
+                break;
+              case 'k':
+                img.src = blackKing;
+                break;
+              case 'P':
+                img.src = whitePawn;
+                break;
+              case 'N':
+                img.src = whiteKnight;
+                break;
+              case 'B':
+                img.src = whiteBishop;
+                break;
+              case 'R':
+                img.src = whiteRook;
+                break;
+              case 'Q':
+                img.src = whiteQueen;
+                break;
+              case 'K':
+                img.src = whiteKing;
+                break;
+            }
+
+            piece.replaceChildren(img);
         } else {
             squares[i].innerHTML = "";
         }
@@ -43,15 +87,15 @@ function renderBoard(board){
 
 
 // eslint-disable-next-line react/prop-types
-function Board({board, dropPiece}){
+function Board({board, dropPiece, dragPiece}){
 
 
 
     useEffect(()=>{
         
-        renderBoard(board);
+        renderBoard(board,dragPiece);
        
-    }, [board])
+    }, [board,dragPiece])
 
     const squares = Array.from(Array(64).keys());
 

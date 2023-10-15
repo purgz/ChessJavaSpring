@@ -16,10 +16,10 @@ function sendName(){
     }
 }
 
-function sendMove(){
+function sendMove(startSquare, endSquare){
     client.publish({
         destination: "/app/moverequest",
-        body: JSON.stringify({"startSquare": 8, "endSquare": 16})
+        body: JSON.stringify({"startSquare": startSquare, "endSquare": endSquare})
     })
 }
 
@@ -37,23 +37,13 @@ function verifyMove(){
     return true;
 }
 
-function dropPiece(e){
-    e.preventDefault();
-    let data = e.dataTransfer.getData("text");   
-    if (verifyMove()){
-        e.target.replaceChildren(document.getElementById(data));
-    } 
-}
+
 
 
 
 function Game(){
 
-    //want socket code to go here to get the board from the server
 
-    //want a setState to set the player move and pass as props to board so it can be set from the board component
-
-    //verify move function passed as props to board for updating the board if the move is valid
 
     const startBoard = ["r", "n", "b", "q", "k", "b", "n", "r", "p", "p", "p", "p", "p", "p", "p", "p",
     '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0',
@@ -61,6 +51,31 @@ function Game(){
     "P", "P", "P", "P", "P", "P", "P", "P", "R", "N", "B", "Q", "K", "B", "N", "R"];
 
     const [board, setBoard] = useState([]);
+    
+    let startSquare = -1;
+    let endSquare = -1;
+
+
+    function dragPiece(e){
+
+      const pieceSquare = e.target.parentNode.parentNode.getAttribute("data-squareid");
+      startSquare = pieceSquare;
+    }
+
+    function dropPiece(e){
+      e.preventDefault();
+
+      if (e.target.className != "square"){
+        endSquare = e.target.parentNode.parentNode.getAttribute("data-squareid");
+      } else {
+        endSquare = e.target.getAttribute("data-squareid");
+      }  
+      console.log(startSquare,endSquare)
+      sendMove(startSquare,endSquare);
+      
+      startSquare = -1;
+      endSquare = -1;
+    }
 
     client.onConnect = (frame) =>{
         console.log("Connected " + frame);
@@ -86,8 +101,8 @@ function Game(){
             <h1>Game page</h1>
             <button onClick={() => setBoard("")}>TEST BUTTON TO CHANGE BOARD STATE</button>
             <hr />
-            <button onClick={sendMove}>click</button>
-            <Board dropPiece = {dropPiece} board = {board}/>
+        
+            <Board dropPiece = {dropPiece} dragPiece={dragPiece} board = {board}/>
 
             <hr/>
             <Link to={"/"}>back home</Link>
