@@ -14,23 +14,16 @@ function pieceDragStart(e){
     e.dataTransfer.setData("text", piece.id);
 }
 
-
-
 function allowPieceDrop(e){
     e.stopPropagation();
     e.preventDefault();
 }
 
-function dropPiece(e){
-    e.preventDefault();
-    let data = e.dataTransfer.getData("text");    
-    e.target.replaceChildren(document.getElementById(data));
-}
 
 
-function renderBoard(props){
+
+function renderBoard(board){
     let squares = document.getElementsByClassName("square");
-    let board = props.board;
     
     for (let i = 0; i < 64; i++){
        
@@ -41,19 +34,24 @@ function renderBoard(props){
             piece.ondragstart = pieceDragStart;
             squares[i].replaceChildren(piece);
             piece.id = i;
+        } else {
+            squares[i].innerHTML = "";
         }
         
     }
 }
 
 
-function Board(props){
+// eslint-disable-next-line react/prop-types
+function Board({board, dropPiece}){
+
 
 
     useEffect(()=>{
         
-        renderBoard(props);
-    }, [props])
+        renderBoard(board);
+       
+    }, [board])
 
     const squares = Array.from(Array(64).keys());
 
