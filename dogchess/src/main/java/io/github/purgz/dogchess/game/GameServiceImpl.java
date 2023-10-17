@@ -21,9 +21,19 @@ public class GameServiceImpl implements GameService{
         allGames.put(testGame.getBoardId(), testGame);
     }
 
-    @Override
     public Game getGameById(UUID id) {
 
         return allGames.get(id);
+    }
+
+    //creates a new game and returns the game id
+    public UUID createNewGame(){
+
+        Board board = new Board();
+        UUID gameId = UUID.randomUUID();
+        Game game = new Game(board, gameId);
+        allGames.put(gameId, game);
+
+        return gameId;
     }
 }

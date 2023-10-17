@@ -12,7 +12,7 @@ public class Game {
 
     public Game(Board board, UUID boardId) {
         this.board = board;
-        this.boardId = UUID.randomUUID();
+        this.boardId = boardId;
     }
 
     public Board getBoard() {

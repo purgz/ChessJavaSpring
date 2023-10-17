@@ -32,7 +32,7 @@ public class GreetingController {
     @MessageMapping("/moverequest")
     @SendTo("/topic/greetings")
     public char[] moveRequest(MoveRequest move) throws Exception{
-        
+
         board.doLegalMove(new int[] {move.startSquare, move.endSquare});
         return board.getSquares();
     }
