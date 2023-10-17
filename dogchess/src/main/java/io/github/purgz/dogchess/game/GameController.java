@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -39,5 +40,12 @@ public class GameController {
         }
 
         return game.get();
+    }
+
+    @GetMapping("/all-games")
+    public Set<UUID> getALlGames(){
+        
+        System.out.println("TESTING");
+        return gameService.allGames();
     }
 }

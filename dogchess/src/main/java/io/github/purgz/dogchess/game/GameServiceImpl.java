@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -35,5 +36,10 @@ public class GameServiceImpl implements GameService{
         allGames.put(gameId, game);
 
         return gameId;
+    }
+
+    public Set<UUID> allGames(){
+
+        return allGames.keySet();
     }
 }
