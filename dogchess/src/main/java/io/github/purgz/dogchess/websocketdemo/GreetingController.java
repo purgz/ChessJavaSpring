@@ -37,5 +37,7 @@ public class GreetingController {
         return board.getSquares();
     }
 
+    // TODO: 17/10/2023 Organize socket code properly, remove this demo 
+
 
 }

@@ -44,8 +44,8 @@ public class GameController {
 
     @GetMapping("/all-games")
     public Set<UUID> getALlGames(){
-        
-        System.out.println("TESTING");
+
+
         return gameService.allGames();
     }
 }
