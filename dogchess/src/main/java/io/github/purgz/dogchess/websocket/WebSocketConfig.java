@@ -1,4 +1,4 @@
-package io.github.purgz.dogchess.websocketdemo;
+package io.github.purgz.dogchess.websocket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -20,6 +20,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
 
-        registry.addEndpoint("/websocket-test").setAllowedOrigins("http://localhost:5173/");
+        registry.addEndpoint("/live-game").setAllowedOrigins("http://localhost:5173/");
     }
 }

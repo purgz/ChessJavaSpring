@@ -1,24 +1,23 @@
-import { useNavigate, Link} from "react-router-dom"
+import { useNavigate, Link, useParams} from "react-router-dom"
 import Board from "./Board.jsx";
 import { useEffect, useState } from "react";
 import { Client } from "@stomp/stompjs"
 
 const client = new Client({
-    brokerURL: 'ws://localhost:8080/websocket-test'
+    brokerURL: 'ws://localhost:8080/live-game'
 })
 
-function sendName(){
+function getBoard(gameId){
     if (client.connected){
         client.publish({
-            destination: "/app/startboard",
-            body: JSON.stringify({"name": "test name"})
+            destination: "/app/game/"+gameId
         })
     }
 }
 
-function sendMove(startSquare, endSquare){
+function sendMove(startSquare, endSquare, gameId){
     client.publish({
-        destination: "/app/moverequest",
+        destination: "/app/move-request/"+gameId,
         body: JSON.stringify({"startSquare": startSquare, "endSquare": endSquare})
     })
 }
@@ -33,7 +32,9 @@ function disconnect(){
 
 function Game(){
 
+    let { gameId } = useParams();
 
+    console.log("GAME ID " + gameId);
 
     const startBoard = ["r", "n", "b", "q", "k", "b", "n", "r", "p", "p", "p", "p", "p", "p", "p", "p",
     '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0',
@@ -63,7 +64,7 @@ function Game(){
         endSquare = e.target.getAttribute("data-squareid");
       }  
       console.log(startSquare,endSquare)
-      sendMove(startSquare,endSquare);
+      sendMove(startSquare,endSquare, gameId);
       
       startSquare = -1;
       endSquare = -1;      
@@ -72,9 +73,9 @@ function Game(){
     client.onConnect = (frame) =>{
         console.log("Connected " + frame);
 
-        sendName();
+        getBoard(gameId);
         
-        client.subscribe("/topic/greetings", (greeting) =>{
+        client.subscribe("/topic/greetings/"+gameId, (greeting) =>{
     
             const board = JSON.parse(greeting.body);
             console.log(board);

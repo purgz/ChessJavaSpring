@@ -1,4 +1,4 @@
-package io.github.purgz.dogchess.websocketdemo;
+package io.github.purgz.dogchess.websocket;
 
 public class Message {
 
