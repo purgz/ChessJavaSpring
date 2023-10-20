@@ -1,6 +1,6 @@
 import { useNavigate, Link, useParams} from "react-router-dom"
 import Board from "./Board.jsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { Client } from "@stomp/stompjs"
 
 const client = new Client({
@@ -70,23 +70,36 @@ function Game(){
       endSquare = -1;      
     }
 
-    client.onConnect = (frame) =>{
-        console.log("Connected " + frame);
-
-        getBoard(gameId);
-        
-        client.subscribe("/topic/greetings/"+gameId, (greeting) =>{
-    
-            const board = JSON.parse(greeting.body);
-            console.log(board);
-            setBoard(board);
-        })
-    }
-
 
     useEffect(()=>{
+        console.log(client.connected)        
         connect();
-    })
+
+        client.onConnect = (frame) =>{
+            console.log("Connected " + frame);
+    
+            getBoard(gameId);
+            
+            client.subscribe("/topic/greetings/"+gameId, (greeting) =>{
+        
+                const newBoard = JSON.parse(greeting.body);
+                console.log("BOARD " + newBoard);
+                setBoard(newBoard);
+            })
+        }
+
+        client.onDisconnect = () =>{
+            console.log("disconnected")
+        }
+    }, [gameId])
+
+    useEffect(()=>{
+        return () =>{
+            disconnect();
+        }
+    },[])
+
+   
 
     return (
 

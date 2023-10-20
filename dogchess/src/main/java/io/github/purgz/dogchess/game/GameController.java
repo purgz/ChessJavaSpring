@@ -1,15 +1,13 @@
 package io.github.purgz.dogchess.game;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+@CrossOrigin
 @RestController
 @RequestMapping("game")
 public class GameController {
@@ -23,7 +21,7 @@ public class GameController {
     }
 
 
-    @GetMapping("/new-default-game")
+    @PostMapping("/new-default-game")
     public UUID newDefaultGame(){
 
         return gameService.createNewGame();
