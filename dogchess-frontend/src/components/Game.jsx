@@ -105,7 +105,7 @@ function Game(){
 
         <main>
             <h1>Game page</h1>
-            <button onClick={() => setBoard("")}>TEST BUTTON TO CHANGE BOARD STATE</button>
+            
             <hr />
         
             <Board dropPiece = {dropPiece} dragPiece={dragPiece} board = {board}/>
