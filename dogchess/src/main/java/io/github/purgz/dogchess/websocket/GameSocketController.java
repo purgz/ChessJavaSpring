@@ -10,6 +10,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
+import org.springframework.web.socket.messaging.SessionSubscribeEvent;
+import org.springframework.web.socket.messaging.SessionUnsubscribeEvent;
 
 import java.util.UUID;
 
@@ -44,8 +46,24 @@ public class GameSocketController {
         return game.getBoard().getSquares();
     }
 
+    /*
     @EventListener
     public void onDisconnectEvent(SessionDisconnectEvent event){
         System.out.println(event);
     }
+     */
+
+    @EventListener
+    public void onConnectToGame(SessionSubscribeEvent event){
+        System.out.println(event);
+    }
+
+    @EventListener
+    public void onDisconnectFromGame(SessionDisconnectEvent event){
+        System.out.println(event);
+    }
+
+    //add principal of user to disconnect event
+    //when a user disconnects, find the game that they are currently in,
+    //delete the game from the hashmap if both users have disconnected
 }

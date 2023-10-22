@@ -7,6 +7,7 @@ const client = new Client({
     brokerURL: 'ws://localhost:8080/live-game'
 })
 
+
 function getBoard(gameId){
     if (client.connected){
         client.publish({
@@ -27,12 +28,14 @@ function connect(){
 }
 
 function disconnect(){
+
     void client.deactivate();
 }
 
 function Game(){
 
     let { gameId } = useParams();
+
 
     //console.log("GAME ID " + gameId);
 
@@ -69,31 +72,33 @@ function Game(){
       endSquare = -1;      
     }
 
+    client.onConnect = (frame) =>{
+        console.log("Connected " + frame);
+
+        getBoard(gameId);
+
+        client.subscribe("/topic/greetings/"+gameId, (greeting) =>{
+
+            const newBoard = JSON.parse(greeting.body);
+
+            setBoard(newBoard);
+        })
+    }
+
+    client.onDisconnect = () =>{
+
+        console.log("disconnected")
+    }
 
     useEffect(()=>{
         //console.log(client.connected)
         connect();
 
-        client.onConnect = (frame) =>{
-            console.log("Connected " + frame);
-    
-            getBoard(gameId);
-            
-            client.subscribe("/topic/greetings/"+gameId, (greeting) =>{
-        
-                const newBoard = JSON.parse(greeting.body);
-
-                setBoard(newBoard);
-            })
-        }
-
-        client.onDisconnect = () =>{
-            console.log("disconnected")
-        }
-    }, [gameId])
+    }, [])
 
     useEffect(()=>{
         return () =>{
+
             disconnect();
         }
     },[])
