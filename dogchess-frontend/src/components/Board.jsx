@@ -30,7 +30,7 @@ function renderBoard(board,dragPiece){
     
     for (let i = 0; i < 64; i++){
        
-        if (board[i] != '\0'){
+        if (board[i] !== '\0'){
             let piece = document.createElement("div");
             piece.draggable=true;
             piece.textContent = board[i];

@@ -1,7 +1,7 @@
-import { useNavigate, Link, useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import Board from "./Board.jsx";
-import { useEffect, useState} from "react";
-import { Client } from "@stomp/stompjs"
+import {useEffect, useState} from "react";
+import {Client} from "@stomp/stompjs"
 
 const client = new Client({
     brokerURL: 'ws://localhost:8080/live-game'
@@ -34,7 +34,7 @@ function Game(){
 
     let { gameId } = useParams();
 
-    console.log("GAME ID " + gameId);
+    //console.log("GAME ID " + gameId);
 
     const startBoard = ["r", "n", "b", "q", "k", "b", "n", "r", "p", "p", "p", "p", "p", "p", "p", "p",
     '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0',
@@ -49,8 +49,7 @@ function Game(){
 
     function dragPiece(e){
 
-      const pieceSquare = e.target.parentNode.parentNode.getAttribute("data-squareid");
-      startSquare = pieceSquare;
+      startSquare = e.target.parentNode.parentNode.getAttribute("data-squareid");
 
     }
 
@@ -58,7 +57,7 @@ function Game(){
     function dropPiece(e){
       e.preventDefault();
       
-      if (e.target.className != "square"){
+      if (e.target.className !== "square"){
         endSquare = e.target.parentNode.parentNode.getAttribute("data-squareid");
       } else {
         endSquare = e.target.getAttribute("data-squareid");
@@ -72,7 +71,7 @@ function Game(){
 
 
     useEffect(()=>{
-        console.log(client.connected)        
+        //console.log(client.connected)
         connect();
 
         client.onConnect = (frame) =>{
@@ -83,7 +82,7 @@ function Game(){
             client.subscribe("/topic/greetings/"+gameId, (greeting) =>{
         
                 const newBoard = JSON.parse(greeting.body);
-                console.log("BOARD " + newBoard);
+
                 setBoard(newBoard);
             })
         }
