@@ -1,4 +1,4 @@
-package io.github.purgz.dogchess.game;
+package io.github.purgz.pogchess.game;
 
 import engine.Board;
 

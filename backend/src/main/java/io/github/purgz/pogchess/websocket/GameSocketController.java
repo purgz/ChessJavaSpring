@@ -1,8 +1,8 @@
-package io.github.purgz.dogchess.websocket;
+package io.github.purgz.pogchess.websocket;
 
 
-import io.github.purgz.dogchess.game.Game;
-import io.github.purgz.dogchess.game.GameService;
+import io.github.purgz.pogchess.game.Game;
+import io.github.purgz.pogchess.game.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -11,7 +11,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import org.springframework.web.socket.messaging.SessionSubscribeEvent;
-import org.springframework.web.socket.messaging.SessionUnsubscribeEvent;
 
 import java.util.UUID;
 

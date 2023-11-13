@@ -1,4 +1,4 @@
-package io.github.purgz.dogchess.game;
+package io.github.purgz.pogchess.game;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

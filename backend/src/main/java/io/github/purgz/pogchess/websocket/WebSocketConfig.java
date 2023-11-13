@@ -1,4 +1,4 @@
-package io.github.purgz.dogchess.websocket;
+package io.github.purgz.pogchess.websocket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

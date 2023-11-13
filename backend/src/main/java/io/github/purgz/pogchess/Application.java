@@ -1,13 +1,13 @@
-package io.github.purgz.dogchess;
+package io.github.purgz.pogchess;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DogchessApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DogchessApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

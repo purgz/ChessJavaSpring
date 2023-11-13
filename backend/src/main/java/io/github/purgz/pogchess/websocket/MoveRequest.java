@@ -1,4 +1,4 @@
-package io.github.purgz.dogchess.websocket;
+package io.github.purgz.pogchess.websocket;
 
 public class MoveRequest {
 
