@@ -37,7 +37,7 @@ function Home(){
             <button onClick={createGameAndRedirect}>Create new game</button>
             <hr />
 
-            <Link to= {"/game"}>Play game</Link>
+            
         </main>
 
     )
