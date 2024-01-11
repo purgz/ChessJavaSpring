@@ -11,3 +11,7 @@ public class Application {
 	}
 
 }
+
+
+// TODO: 11/01/2024 Create custom user and custom user details
+// TODO: 11/01/2024 Setup mysql database for now just connecting to db from other project
