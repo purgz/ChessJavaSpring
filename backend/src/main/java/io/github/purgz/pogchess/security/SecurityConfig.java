@@ -70,8 +70,10 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        .requestMatchers(HttpMethod.GET).hasAnyRole("ADMIN","USER")
-                        .requestMatchers(HttpMethod.POST).hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                        //.requestMatchers(HttpMethod.GET,"/game/**").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.POST,"/game/new-default-game").authenticated()
+                        .anyRequest().authenticated()
         );
 
         http.httpBasic(Customizer.withDefaults());

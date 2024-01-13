@@ -8,6 +8,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import org.springframework.web.socket.messaging.SessionSubscribeEvent;
@@ -28,6 +29,8 @@ public class GameSocketController {
     @MessageMapping("/game/{gameId}")
     @SendTo("/topic/greetings/{gameId}")
     public char[] startBoard(@DestinationVariable UUID gameId) throws Exception{
+
+
 
         Game game = gameService.getGameById(gameId);
 
