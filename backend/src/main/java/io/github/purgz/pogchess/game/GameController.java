@@ -1,6 +1,8 @@
 package io.github.purgz.pogchess.game;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -22,7 +24,9 @@ public class GameController {
 
 
     @PostMapping("/new-default-game")
-    public UUID newDefaultGame(){
+    public UUID newDefaultGame(@AuthenticationPrincipal UserDetails userDetails){
+
+        //System.out.println(userDetails.getUsername() + " CREATED A GAME");
 
         return gameService.createNewGame();
     }

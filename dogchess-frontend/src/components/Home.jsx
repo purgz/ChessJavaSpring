@@ -9,6 +9,9 @@ function Home(){
     const {auth} = useAuth();
     const {setAuth} = useContext(AuthContext);
 
+    const [gameCode, setGameCode] = useState('')
+
+
     const navigate = useNavigate();
     let gameId;
 
@@ -43,6 +46,11 @@ function Home(){
         }
     }
 
+    function joinGameAndRedirect(){
+
+        navigate(`/game/${gameCode}`)
+    }
+
     return (
 
         <main>
@@ -51,6 +59,14 @@ function Home(){
 
             <button onClick={createGameAndRedirect}>Create new game</button>
             <hr />
+
+            <input
+                type="text"
+                id = "gameCode"
+                onChange={(e) => setGameCode(e.target.value)}
+                value={gameCode}
+            />
+            <button onClick = {joinGameAndRedirect}>Join game</button>
 
             
         </main>
